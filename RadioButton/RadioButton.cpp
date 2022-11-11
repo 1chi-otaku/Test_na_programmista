@@ -14,6 +14,11 @@ HWND radio[30];
 HWND hAnswer1, hAnswer2, hAnswer3;
 TCHAR Answer1[25], Answer2[25], Answer3[25];
 
+BOOL Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) {
+
+
+	return TRUE;
+}
 BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 {
 	TCHAR str[100];
