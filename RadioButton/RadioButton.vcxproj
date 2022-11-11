@@ -160,6 +160,9 @@
     <ResourceCompile Include="RadioButton.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Desktop\c##.bmp" />
+    <Image Include="..\..\..\..\Desktop\css.bmp" />
+    <Image Include="..\..\..\..\Desktop\ISO_C++_Logo.bmp" />
     <Image Include="..\..\c##.bmp" />
     <Image Include="..\..\css.bmp" />
     <Image Include="..\..\ISO_C++_Logo.bmp" />

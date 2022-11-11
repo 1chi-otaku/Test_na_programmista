@@ -34,7 +34,6 @@
 #define IDC_RADIO19                     1026
 #define IDC_RADIO20                     1027
 #define IDC_RADIO21                     1028
-
 #define IDC_CHECK22                     1029
 #define IDC_CHECK23                     1030
 #define IDC_CHECK24                     1031
@@ -47,13 +46,15 @@
 #define IDC_EDIT3                       10293
 #define IDC_EDIT4                       10300
 #define IDC_EDIT5                       10342
+#define ID_MENU_EXIT                    40001
+#define IDR_MENU1                       108
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        108
-#define _APS_NEXT_COMMAND_VALUE         40001
+#define _APS_NEXT_RESOURCE_VALUE        109
+#define _APS_NEXT_COMMAND_VALUE         40002
 #define _APS_NEXT_CONTROL_VALUE         10309
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
