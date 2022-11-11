@@ -14,10 +14,14 @@ HWND radio[30];
 HWND hAnswer1, hAnswer2, hAnswer3;
 TCHAR Answer1[25], Answer2[25], Answer3[25];
 
+HWND hTemp;
+
+
 BOOL Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) {
 
-
+	
 	return TRUE;
+
 }
 BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 {
@@ -30,10 +34,14 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 		EndDialog(hWnd, 0);
 		return TRUE;
 
-	case  WM_INITDIALOG:
+	case  WM_INITDIALOG: {
+		// Загрузим меню из ресурсов приложения
+		HMENU hMenu = LoadMenu(GetModuleHandle(NULL), MAKEINTRESOURCE(IDR_MENU1));
+		// Присоединим меню к главному окну приложения
+		SetMenu(hWnd, hMenu);
 		for (int i = 0; i < 30; i++)
 		{
-			radio[i] = GetDlgItem(hWnd, IDC_RADIO1+i);
+			radio[i] = GetDlgItem(hWnd, IDC_RADIO1 + i);
 		}
 
 		hAnswer1 = GetDlgItem(hWnd, IDC_EDIT3);
@@ -41,7 +49,14 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 		hAnswer3 = GetDlgItem(hWnd, IDC_EDIT4);
 		return TRUE;
 
+	}
+		
+
 	case WM_COMMAND:
+
+		if (LOWORD(wp) == ID_MENU_EXIT) {
+			SendMessage(hWnd, WM_CLOSE, 0, 0);
+		}
 
 		if (LOWORD(wp) == IDOK)
 		{
