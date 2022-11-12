@@ -7,6 +7,7 @@
 #define IDB_BITMAP1                     105
 #define IDB_BITMAP2                     106
 #define IDB_BITMAP3                     107
+#define IDR_MENU1                       108
 #define IDC_BUTTON1                     1001
 #define IDC_EDIT1                       1002
 #define IDC_PROGRESS1                   1004
@@ -45,9 +46,9 @@
 #define IDC_CHECK30                     1037
 #define IDC_EDIT3                       10293
 #define IDC_EDIT4                       10300
+#define IDC_SPIN1                       10309
 #define IDC_EDIT5                       10342
 #define ID_MENU_EXIT                    40001
-#define IDR_MENU1                       108
 
 // Next default values for new objects
 // 
@@ -55,7 +56,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        109
 #define _APS_NEXT_COMMAND_VALUE         40002
-#define _APS_NEXT_CONTROL_VALUE         10309
+#define _APS_NEXT_CONTROL_VALUE         10310
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif
