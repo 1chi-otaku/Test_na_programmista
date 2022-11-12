@@ -27,7 +27,7 @@ HWND hScroll16, hScroll17;
 BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 {
 	TCHAR str[100];
-	const double questions = 13;
+	const double questions = 15;
 	static int right_answers = 0;
 	switch (message)
 	{
@@ -131,7 +131,9 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 			if (SendMessage(hScroll16, UDM_GETPOS32, 0, 0) == 5) {
 				right_answers++;
 			}
-			
+			if (SendMessage(hScroll17, UDM_GETPOS32, 0, 0) == 5) {
+				right_answers++;
+			}
 			double result = (right_answers / questions) * 100;
 
 			_stprintf_s(str, TEXT("Вы набрали - %.2f/100"), result);
