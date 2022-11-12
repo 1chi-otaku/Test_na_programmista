@@ -20,6 +20,8 @@ TCHAR Answer1[25], Answer2[25], Answer3[25];
 
 HWND hTemp;
 
+HWND hEdit1;
+HWND hScroll1;
 
 BOOL Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) {
 
