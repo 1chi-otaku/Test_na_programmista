@@ -23,12 +23,8 @@ HWND hTemp;
 HWND hEdit1;
 HWND hScroll1;
 
-BOOL Cls_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) {
 
-	
-	return TRUE;
 
-}
 BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 {
 	TCHAR str[100];
