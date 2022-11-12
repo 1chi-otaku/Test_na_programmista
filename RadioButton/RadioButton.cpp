@@ -23,6 +23,8 @@ HWND hTemp;
 HWND hEdit16, hEdit17;
 HWND hScroll16, hScroll17;
 
+HWND hProgress;
+
 
 BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 {
@@ -52,6 +54,11 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 		hScroll17 = GetDlgItem(hWnd, IDC_SPIN17);
 		hEdit16 = GetDlgItem(hWnd, IDC_EDIT16);
 		hEdit17 = GetDlgItem(hWnd, IDC_EDIT17);
+		hProgress = GetDlgItem(hWnd, IDC_PROGRESS1);
+		SendMessage(hProgress, PBM_SETRANGE, 0, MAKELPARAM(0, questions)); // Установка интервала для индикатора 
+		SendMessage(hProgress, PBM_SETSTEP, 1, 15); // Установка шага приращения  индикатора 
+		SendMessage(hProgress, PBM_SETBARCOLOR, 0, LPARAM(RGB(0, 0, 0))); // Установка цвета заполняемых прямоугольников
+
 
 		SendMessage(hScroll16, UDM_SETRANGE32, 0, 100);
 		SendMessage(hScroll17, UDM_SETRANGE32, 0, 100);
@@ -72,6 +79,7 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 
 		if (LOWORD(wp) == ID_MENU_EXIT) {
 			SendMessage(hWnd, WM_CLOSE, 0, 0);
+			
 		}
 
 		if (LOWORD(wp) == IDOK)
@@ -137,9 +145,10 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 			double result = (right_answers / questions) * 100;
 
 			_stprintf_s(str, TEXT("Вы набрали - %.2f/100"), result);
+			SendMessage(hProgress, PBM_SETPOS, right_answers, 15); // Установка текущей позиции индикатора
 			MessageBox(hWnd, str, TEXT("Результаты"), MB_OK | MB_ICONINFORMATION);
 			right_answers = 0;
-
+			
 			
 		}
 		return TRUE;
