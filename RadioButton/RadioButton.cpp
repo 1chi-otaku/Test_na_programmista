@@ -56,19 +56,19 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 		hEdit17 = GetDlgItem(hWnd, IDC_EDIT17);
 		hProgress = GetDlgItem(hWnd, IDC_PROGRESS1);
 		SendMessage(hProgress, PBM_SETRANGE, 0, MAKELPARAM(0, questions)); // Установка интервала для индикатора 
-		SendMessage(hProgress, PBM_SETSTEP, 1, 15); // Установка шага приращения  индикатора 
+		SendMessage(hProgress, PBM_SETSTEP, 5, 0); // Установка шага приращения  индикатора 
 		SendMessage(hProgress, PBM_SETBARCOLOR, 0, LPARAM(RGB(0, 0, 0))); // Установка цвета заполняемых прямоугольников
 
 
 		SendMessage(hScroll16, UDM_SETRANGE32, 0, 100);
-		SendMessage(hScroll17, UDM_SETRANGE32, 0, 100);
-		UDACCEL pAcceleration[3] = { {1,5}, {3,10}, {5,20} };
+		SendMessage(hScroll17, UDM_SETRANGE32, 2000, 3000);
+		UDACCEL pAcceleration[3] = { {1,1}, {5,5}, {10,10} };
 		SendMessage(hScroll16, UDM_SETACCEL, 3, LPARAM(pAcceleration));
 		SendMessage(hScroll17, UDM_SETACCEL, 3, LPARAM(pAcceleration));
 		SendMessage(hScroll16, UDM_SETBUDDY, WPARAM(hEdit16), 0);
 		SendMessage(hScroll17, UDM_SETBUDDY, WPARAM(hEdit17), 0);
 		SetWindowText(hEdit16, TEXT("0"));
-		SetWindowText(hEdit17, TEXT("0"));
+		SetWindowText(hEdit17, TEXT("2022"));
 
 		return TRUE;
 
@@ -134,12 +134,10 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 				right_answers++;
 			}
 
-			
-
-			if (SendMessage(hScroll16, UDM_GETPOS32, 0, 0) == 5) {
+			if (SendMessage(hScroll16, UDM_GETPOS32, 0, 0) == 20) {
 				right_answers++;
 			}
-			if (SendMessage(hScroll17, UDM_GETPOS32, 0, 0) == 5) {
+			if (SendMessage(hScroll17, UDM_GETPOS32, 0, 0) == 2038) {
 				right_answers++;
 			}
 			double result = (right_answers / questions) * 100;
