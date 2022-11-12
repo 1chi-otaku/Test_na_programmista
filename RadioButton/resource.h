@@ -2,14 +2,13 @@
 // Microsoft Visual C++ generated include file.
 // Used by RadioButton.rc
 //
-#define IDD_DIALOG1                     101
 #define IDD_DIALOG2                     103
 #define IDB_BITMAP1                     105
 #define IDB_BITMAP2                     106
 #define IDB_BITMAP3                     107
 #define IDR_MENU1                       108
-#define IDC_BUTTON1                     1001
 #define IDC_EDIT1                       1002
+#define IDC_EDIT16                      10026
 #define IDC_PROGRESS1                   1004
 #define IDC_PROGRESS2                   1005
 #define IDC_COMBO1                      1006
@@ -47,6 +46,7 @@
 #define IDC_EDIT3                       10293
 #define IDC_EDIT4                       10300
 #define IDC_SPIN1                       10309
+#define IDC_SPIN16                      103096
 #define IDC_EDIT5                       10342
 #define ID_MENU_EXIT                    40001
 
