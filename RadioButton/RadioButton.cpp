@@ -49,6 +49,8 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 		hAnswer1 = GetDlgItem(hWnd, IDC_EDIT3);
 		hAnswer2 = GetDlgItem(hWnd, IDC_EDIT5);
 		hAnswer3 = GetDlgItem(hWnd, IDC_EDIT4);
+		hEdit1 = GetDlgItem(hWnd, IDC_EDIT16);
+		hScroll1 = GetDlgItem(hWnd, IDC_SPIN16);
 		return TRUE;
 
 	}
