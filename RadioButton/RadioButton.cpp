@@ -20,8 +20,8 @@ TCHAR Answer1[25], Answer2[25], Answer3[25];
 
 HWND hTemp;
 
-HWND hEdit1;
-HWND hScroll1;
+HWND hEdit16;
+HWND hScroll16;
 
 
 
@@ -49,13 +49,14 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 		hAnswer1 = GetDlgItem(hWnd, IDC_EDIT3);
 		hAnswer2 = GetDlgItem(hWnd, IDC_EDIT5);
 		hAnswer3 = GetDlgItem(hWnd, IDC_EDIT4);
-		hEdit1 = GetDlgItem(hWnd, IDC_EDIT16);
-		hScroll1 = GetDlgItem(hWnd, IDC_SPIN16);
-		SendMessage(hScroll1, UDM_SETRANGE32, 10, 100);
+		hScroll16 = GetDlgItem(hWnd, IDC_SPIN16);
+		hEdit16 = GetDlgItem(hWnd, IDC_EDIT16);
+		
+		SendMessage(hScroll16, UDM_SETRANGE32, 0, 100);
 		UDACCEL pAcceleration[3] = { {1,5}, {3,10}, {5,20} };
-		SendMessage(hScroll1, UDM_SETACCEL, 3, LPARAM(pAcceleration));
-		SendMessage(hScroll1, UDM_SETBUDDY, WPARAM(hEdit1), 0);
-		SetWindowText(hEdit1, TEXT("0"));
+		SendMessage(hScroll16, UDM_SETACCEL, 3, LPARAM(pAcceleration));
+		SendMessage(hScroll16, UDM_SETBUDDY, WPARAM(hEdit16), 0);
+		SetWindowText(hEdit16, TEXT("0"));
 
 		return TRUE;
 
@@ -120,6 +121,11 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 				right_answers++;
 			}
 
+			int result2 = SendMessage(hScroll16, UDM_GETPOS32, 0, 0);
+
+			if (result2 == 5) {
+				right_answers++;
+			}
 			
 			double result = (right_answers / questions) * 100;
 
