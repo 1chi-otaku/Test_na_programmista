@@ -51,6 +51,12 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 		hAnswer3 = GetDlgItem(hWnd, IDC_EDIT4);
 		hEdit1 = GetDlgItem(hWnd, IDC_EDIT16);
 		hScroll1 = GetDlgItem(hWnd, IDC_SPIN16);
+		SendMessage(hScroll1, UDM_SETRANGE32, 10, 100);
+		UDACCEL pAcceleration[3] = { {1,5}, {3,10}, {5,20} };
+		SendMessage(hScroll1, UDM_SETACCEL, 3, LPARAM(pAcceleration));
+		SendMessage(hScroll1, UDM_SETBUDDY, WPARAM(hEdit1), 0);
+		SetWindowText(hEdit1, TEXT("0"));
+
 		return TRUE;
 
 	}
