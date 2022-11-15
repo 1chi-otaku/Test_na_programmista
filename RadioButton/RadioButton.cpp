@@ -25,12 +25,48 @@ HWND hScroll16, hScroll17;
 
 HWND hProgress;
 
+HWND hTime;
+
+BOOL FLAG = TRUE;
+
+HANDLE hThread;
+
+DWORD WINAPI Thread(LPVOID lp)
+{
+	int minutes = 0;
+	int seconds = 5;
+	TCHAR tchar[5];
+	while (seconds != 0 || minutes != 0)
+	{
+		if (seconds == 0) {
+			seconds = 59;
+			minutes--;
+		}
+		wsprintf(tchar, TEXT("%d:%d"), minutes, seconds);
+		SetWindowText(hTime, tchar);
+		Sleep(1000);
+		seconds--;
+	}
+	FLAG = FALSE;
+	return 0;
+}
 
 BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 {
 	TCHAR str[100];
 	const double questions = 15;
 	static int right_answers = 0;
+
+	if (FLAG == FALSE) {
+		FLAG = TRUE;
+		unsigned int result = MessageBox(hWnd, TEXT("Время вышло"), TEXT("Викторина экстренно закрывается!"), MB_OK | MB_ICONERROR);
+		
+		if (result == IDOK) {
+			PostQuitMessage(0);
+			return TRUE;
+		}
+	}
+
 	switch (message)
 	{
 	case WM_CLOSE:
@@ -55,6 +91,7 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 		hEdit16 = GetDlgItem(hWnd, IDC_EDIT16);
 		hEdit17 = GetDlgItem(hWnd, IDC_EDIT17);
 		hProgress = GetDlgItem(hWnd, IDC_PROGRESS1);
+		hTime = GetDlgItem(hWnd, IDC_EDIT1);
 		SendMessage(hProgress, PBM_SETRANGE, 0, MAKELPARAM(0, questions)); // Установка интервала для индикатора 
 		SendMessage(hProgress, PBM_SETSTEP, 5, 0); // Установка шага приращения  индикатора 
 		SendMessage(hProgress, PBM_SETBARCOLOR, 0, LPARAM(RGB(0, 0, 0))); // Установка цвета заполняемых прямоугольников
@@ -69,11 +106,14 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 		SendMessage(hScroll17, UDM_SETBUDDY, WPARAM(hEdit17), 0);
 		SetWindowText(hEdit16, TEXT("0"));
 		SetWindowText(hEdit17, TEXT("2022"));
+		hThread = CreateThread(NULL, 0, Thread, hTime, 0, NULL);
+		
 
 		return TRUE;
 
 	}
-		
+
+	
 
 	case WM_COMMAND:
 
@@ -81,9 +121,11 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 			SendMessage(hWnd, WM_CLOSE, 0, 0);
 			
 		}
+		
 
 		if (LOWORD(wp) == IDOK)
 		{
+			SuspendThread(hThread);
 			LRESULT lResult = SendMessage(radio[0], BM_GETCHECK, 0, 0);
 			LRESULT RResult;
 			LRESULT MResult;
@@ -146,6 +188,10 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 			SendMessage(hProgress, PBM_SETPOS, right_answers, 15); // Установка текущей позиции индикатора
 			MessageBox(hWnd, str, TEXT("Результаты"), MB_OK | MB_ICONINFORMATION);
 			right_answers = 0;
+
+
+			TerminateThread(hThread,0);
+			hThread = CreateThread(NULL, 0, Thread, hTime, 0, NULL);
 			
 			
 		}
