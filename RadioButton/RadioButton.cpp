@@ -33,8 +33,8 @@ HANDLE hThread;
 
 DWORD WINAPI Thread(LPVOID lp)
 {
-	int minutes = 0;
-	int seconds = 5;
+	int minutes = 1;
+	int seconds = 15;
 	TCHAR tchar[5];
 	while (seconds != 0 || minutes != 0)
 	{
