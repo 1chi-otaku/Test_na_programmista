@@ -33,6 +33,9 @@ HANDLE hThread;
 
 DWORD WINAPI Thread(LPVOID lp)
 {
+	DWORD priority_beg = GetPriorityClass(GetCurrentProcess());
+	SetPriorityClass(GetCurrentProcess(), ABOVE_NORMAL_PRIORITY_CLASS);
+	SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_ABOVE_NORMAL);
 	int minutes = 1;
 	int seconds = 15;
 	TCHAR tchar[5];
@@ -48,6 +51,7 @@ DWORD WINAPI Thread(LPVOID lp)
 		seconds--;
 	}
 	FLAG = FALSE;
+	SetPriorityClass(GetCurrentProcess(), priority_beg);
 	return 0;
 }
 
